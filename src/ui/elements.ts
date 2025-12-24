@@ -2,7 +2,10 @@ import type { Boundary, Viewport, ViewportType } from "../types.ts";
 import { createElement } from "../utils/dom.ts";
 
 /**
- * Creates the main container element
+ * Create the croppie container element.
+ *
+ * @param customClass - Optional additional class name to append to the container's class list
+ * @returns The created div element with class "croppie-container" and the optional `customClass` appended
  */
 export function createContainer(customClass?: string): HTMLDivElement {
 	const container = createElement("div", {
@@ -12,7 +15,10 @@ export function createContainer(customClass?: string): HTMLDivElement {
 }
 
 /**
- * Creates the boundary element (outer container)
+ * Create the outer boundary element that constrains the crop area.
+ *
+ * @param boundary - Object describing the boundary's width and height in pixels
+ * @returns The created div element used as the boundary container
  */
 export function createBoundary(boundary: Boundary): HTMLDivElement {
 	const element = createElement("div", {
@@ -28,7 +34,10 @@ export function createBoundary(boundary: Boundary): HTMLDivElement {
 }
 
 /**
- * Creates the viewport element (crop area overlay)
+ * Create a positioned, sized DOM element that represents the crop viewport.
+ *
+ * @param viewport - Object describing the viewport's width, height, and type which determine the element's size and shape
+ * @returns The configured `HTMLDivElement` to be used as the viewport element (includes class `cr-viewport cr-vp-{type}`)
  */
 export function createViewport(viewport: Viewport): HTMLDivElement {
 	const element = createElement("div", {
@@ -48,7 +57,11 @@ export function createViewport(viewport: Viewport): HTMLDivElement {
 }
 
 /**
- * Creates the overlay element (darkened area outside viewport)
+ * Creates the overlay that darkens the area outside the viewport.
+ *
+ * @param boundary - The cropping boundary used to position and size the overlay mask
+ * @param viewport - The viewport dimensions and type that define the transparent cutout
+ * @returns The overlay div element with a semi-transparent black background and a mask that cuts out the viewport area
  */
 export function createOverlay(
 	boundary: Boundary,
@@ -76,7 +89,11 @@ export function createOverlay(
 }
 
 /**
- * Creates a CSS mask image for the viewport cutout
+ * Generates a CSS `mask-image` string that creates a transparent cutout for the viewport centered in the boundary.
+ *
+ * @param boundary - Dimensions of the bounding container used to center the cutout.
+ * @param viewport - Viewport dimensions and type ("circle" for circular cutouts, otherwise rectangular).
+ * @returns A CSS `mask-image` value: a `radial-gradient` for circular viewports or two overlapping `linear-gradient`s for rectangular viewports that together produce a transparent hole where the viewport is located.
  */
 function createMaskImage(boundary: Boundary, viewport: Viewport): string {
 	const centerX = boundary.width / 2;
@@ -102,7 +119,12 @@ function createMaskImage(boundary: Boundary, viewport: Viewport): string {
 }
 
 /**
- * Creates the image preview element
+ * Create the image element used as the crop preview.
+ *
+ * The element is configured with alt text, non-draggable behavior, absolute positioning,
+ * origin at the top-left, and no maximum width/height so it can be transformed freely.
+ *
+ * @returns The configured HTMLImageElement used to display the source image inside the cropper.
  */
 export function createPreview(): HTMLImageElement {
 	const element = createElement("img", {
@@ -124,7 +146,12 @@ export function createPreview(): HTMLImageElement {
 }
 
 /**
- * Creates the zoom slider element
+ * Creates a range input element configured as the zoom slider.
+ *
+ * @param min - Minimum slider value
+ * @param max - Maximum slider value
+ * @param value - Initial slider value
+ * @returns The configured HTMLInputElement with type `"range"` and `step` set to `0.01`
  */
 export function createZoomSlider(
 	min: number,
@@ -145,7 +172,9 @@ export function createZoomSlider(
 }
 
 /**
- * Creates the slider container
+ * Create the slider container element used to wrap the zoom slider.
+ *
+ * @returns The created div element with class "cr-slider-wrap".
  */
 export function createSliderContainer(): HTMLDivElement {
 	return createElement("div", {

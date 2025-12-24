@@ -9,7 +9,11 @@ export type { PointsArray };
 export type PointsInput = CropPoints | PointsArray;
 
 /**
- * Normalizes points input to object format
+ * Normalize a points input into a CropPoints object.
+ *
+ * @param points - An array [topLeftX, topLeftY, bottomRightX, bottomRightY], a CropPoints object, or `undefined`.
+ * @returns A CropPoints object corresponding to `points`, or `undefined` if `points` is `undefined`.
+ * @throws Error if `points` is an array whose length is not exactly 4.
  */
 export function normalizePoints(
 	points: PointsInput | undefined,
@@ -36,7 +40,10 @@ export function normalizePoints(
 }
 
 /**
- * Converts object points to array format (for v2.6 compatibility if needed)
+ * Converts a CropPoints object into a PointsArray.
+ *
+ * @param points - Object with `topLeftX`, `topLeftY`, `bottomRightX`, and `bottomRightY` coordinates
+ * @returns A PointsArray in the order [topLeftX, topLeftY, bottomRightX, bottomRightY]
  */
 export function pointsToArray(points: CropPoints): PointsArray {
 	return [
