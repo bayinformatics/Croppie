@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach, afterEach } from 'bun:test'
-import { Croppie } from '../../src/Croppie'
+import { Croppie } from '../../src/Croppie.ts'
 
 describe('Croppie', () => {
   let container: HTMLDivElement

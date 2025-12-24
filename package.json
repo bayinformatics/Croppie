@@ -9,11 +9,10 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/croppie.js",
-      "require": "./dist/croppie.cjs"
+      "import": "./dist/croppie.js"
     },
-    "./style.css": "./dist/croppie.css",
-    "./croppie.css": "./dist/croppie.css"
+    "./croppie.css": "./dist/croppie.css",
+    "./style.css": "./dist/croppie.css"
   },
   "files": [
     "dist",
