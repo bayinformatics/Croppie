@@ -40,6 +40,12 @@ export interface ZoomConfig {
     max: number;
     /** Initial zoom level */
     initial?: number;
+    /**
+     * Automatically enforce minimum zoom to ensure image covers viewport.
+     * When true, prevents zooming out so far that gaps appear.
+     * @default true
+     */
+    enforceMinimumCoverage?: boolean;
 }
 /**
  * Main Croppie configuration options
