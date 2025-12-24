@@ -63,10 +63,13 @@ export function installImageMock(): () => void {
 }
 
 /**
- * Install a mock for getComputedStyle that converts CSS transform strings to matrix format.
- * This works around happy-dom's limitation where getComputedStyle returns raw CSS instead of matrix().
+ * Install a mock for window.getComputedStyle that normalizes element transform values to `matrix(...)` format.
  *
- * @returns A cleanup function that restores the original getComputedStyle
+ * This replaces the global `getComputedStyle` with a wrapper that, when the `transform` property is accessed,
+ * parses simple `translate(xpx, ypx)` and `scale(s)` forms from the element's inline `style.transform` and
+ * returns an equivalent `matrix(a, b, c, d, e, f)` string; other properties are forwarded unchanged.
+ *
+ * @returns The cleanup function that restores the original `window.getComputedStyle`.
  */
 export function installGetComputedStyleMock(): () => void {
 	const originalGetComputedStyle = window.getComputedStyle;
@@ -242,7 +245,7 @@ export function simulateDrag(
 /**
  * Waits until the next animation frame.
  *
- * @returns Resolves with no value after the next animation frame.
+ * @returns No value.
  */
 export function nextFrame(): Promise<void> {
 	return new Promise((resolve) => requestAnimationFrame(() => resolve()));
