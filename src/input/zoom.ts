@@ -1,12 +1,8 @@
+import type { ZoomConfig } from "../types.ts";
 import { clamp } from "../utils/clamp.ts";
 
 export interface ZoomCallbacks {
 	onChange?: (zoom: number, previousZoom: number) => void;
-}
-
-export interface ZoomConfig {
-	min: number;
-	max: number;
 }
 
 /**

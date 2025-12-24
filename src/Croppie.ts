@@ -199,8 +199,9 @@ export class Croppie {
 				(zoom) => this.setZoom(zoom),
 				this.zoomConfig,
 				{
-					onChange: (zoom, previousZoom) => {
-						this.emitEvent("zoom", { zoom, previousZoom });
+					onChange: (_zoom, previousZoom) => {
+						// Emit the actual clamped zoom value (setZoom clamps to effectiveMinZoom)
+						this.emitEvent("zoom", { zoom: this.transform.scale, previousZoom });
 					},
 				},
 				requireCtrl,
@@ -215,8 +216,9 @@ export class Croppie {
 			(zoom) => this.setZoom(zoom),
 			this.zoomConfig,
 			{
-				onChange: (zoom, previousZoom) => {
-					this.emitEvent("zoom", { zoom, previousZoom });
+				onChange: (_zoom, previousZoom) => {
+					// Emit the actual clamped zoom value (setZoom clamps to effectiveMinZoom)
+					this.emitEvent("zoom", { zoom: this.transform.scale, previousZoom });
 				},
 			},
 		);
