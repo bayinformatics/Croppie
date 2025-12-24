@@ -24,6 +24,7 @@ export declare class Croppie {
     private image;
     private transform;
     private zoomConfig;
+    private effectiveMinZoom;
     private eventHandlers;
     private cleanupFns;
     constructor(element: HTMLElement, options: CroppieOptions);
