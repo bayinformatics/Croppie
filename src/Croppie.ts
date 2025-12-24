@@ -201,7 +201,10 @@ export class Croppie {
 				{
 					onChange: (_zoom, previousZoom) => {
 						// Emit the actual clamped zoom value (setZoom clamps to effectiveMinZoom)
-						this.emitEvent("zoom", { zoom: this.transform.scale, previousZoom });
+						this.emitEvent("zoom", {
+							zoom: this.transform.scale,
+							previousZoom,
+						});
 					},
 				},
 				requireCtrl,
