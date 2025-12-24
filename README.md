@@ -26,11 +26,24 @@ pnpm add @bayinformatics/croppie
 bun add @bayinformatics/croppie
 ```
 
+## Compatibility
+
+This is an **ESM-only** package. It works with modern bundlers like Vite, Webpack, Rollup, Next.js, and Bun.
+
+**Breaking Change in v3:** CommonJS `require()` is no longer supported. If you need CommonJS, continue using [Croppie v2.x](https://github.com/Foliotek/Croppie).
+
+```diff
+- const Croppie = require('croppie')
++ import Croppie from '@bayinformatics/croppie'
+```
+
+**For `<script>` tag usage without a bundler, this fork is not for you** — use the original [Croppie v2.x](https://github.com/Foliotek/Croppie) instead.
+
 ## Quick Start
 
 ```typescript
 import Croppie from '@bayinformatics/croppie'
-import '@bayinformatics/croppie/style.css'
+import '@bayinformatics/croppie/croppie.css'
 
 const cropper = new Croppie(document.getElementById('cropper')!, {
   viewport: { width: 200, height: 200, type: 'circle' }
@@ -142,14 +155,25 @@ cropper.on('zoom', ({ zoom, previousZoom }) => {
 
 ## Migrating from Croppie v2
 
-Most of the API is compatible, with a few changes:
+### Quick Reference
+
+| v2 (Original) | v3 (This Fork) |
+|---------------|----------------|
+| `$('#el').croppie({...})` | `new Croppie(element, {...})` |
+| `croppie.bind(url)` | `await croppie.bind(url)` |
+| `croppie.bind({ url, points: [x1,y1,x2,y2] })` | `await croppie.bind({ url, points: {topLeftX, topLeftY, bottomRightX, bottomRightY} })` |
+| `croppie.result({...}).then(cb)` | `const result = await croppie.result({...})` |
+| `$el.on('update', cb)` | `croppie.on('update', cb)` |
+| `import 'croppie/croppie.css'` | `import '@bayinformatics/croppie/croppie.css'` |
+
+### Detailed Changes
 
 ```diff
 - import Croppie from 'croppie'
 + import Croppie from '@bayinformatics/croppie'
 
 - import 'croppie/croppie.css'
-+ import '@bayinformatics/croppie/style.css'
++ import '@bayinformatics/croppie/croppie.css'
 
 // result() now returns a Promise for all types
 - cropper.result({ type: 'canvas' }).then(canvas => {})

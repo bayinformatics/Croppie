@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'bun:test'
-import { normalizePoints, pointsToArray } from '../../src/utils/points'
+import { normalizePoints, pointsToArray } from '../../src/utils/points.ts'
 
 describe('normalizePoints', () => {
   test('converts array format to object', () => {
